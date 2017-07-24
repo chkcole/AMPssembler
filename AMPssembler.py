@@ -257,7 +257,9 @@ def Process_Reads(file_handle, encoding = 33,length = None):
             else:
                 Current_Collection.append(generateReadPairFromFile(la[4],la[5],C,V, encoding,length))
         except:
-            sys.stderr.write("Bad Read")                
+            sys.stderr.write("Bad Read")
+    if len(Current_Collection) > 0:
+        yield(Current_Collection,Current_ID)                       
 def generateReadPairFromFile(line_1,line_2,C,V,encoding = 33,length = 150):
     np = line_1.split("~~~~")
     qp = line_2.split("~~~~")
