@@ -148,7 +148,7 @@ def concensus(tuple_array):
     """
     counts = []
     sequence = contig("",[],[])
-    for i in range(len(tuple_array[0][0])):
+    for i in range(max([len(pair[0]) for pair in tuple_array])):
         counts.append([[0,0],[0,0],[0,0],[0,0],[0,0]])
     for i in tuple_array:
         for j,n in enumerate(i[0]):
@@ -256,8 +256,11 @@ def Process_Reads(file_handle, encoding = 33,length = None):
                     Current_Collection =[generateReadPairFromFile(la[4],la[5],C,V,encoding,length)]
             else:
                 Current_Collection.append(generateReadPairFromFile(la[4],la[5],C,V, encoding,length))
-        except:
-            sys.stderr.write("Bad Read")
+        except Exception as err:
+            raise err
+            exit()
+            sys.stderr.write("Bad Read\n")
+            sys.stderr.write(line)
     if len(Current_Collection) > 0:
         yield(Current_Collection,Current_ID)                       
 def generateReadPairFromFile(line_1,line_2,C,V,encoding = 33,length = 150):
@@ -267,7 +270,8 @@ def generateReadPairFromFile(line_1,line_2,C,V,encoding = 33,length = 150):
         length = len(np[0])
     if length > len(np[0]):
         length = len(np[0])
-    return(readPair(np[0][:length],np[1][:length],qp[0][:length],qp[1][:length],C,V,encoding))
+    current_readPair = readPair(np[0][:length],np[1][:length],qp[0][:length],qp[1][:length],C,V,encoding)
+    return(current_readPair)
 
 def format_output(seq,qual,both,C,V,UID):
     print("@"+str(UID)+"_#"+str(both)+"_#"+str(C)+"_#"+str(V))
