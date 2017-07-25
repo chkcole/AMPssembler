@@ -61,7 +61,6 @@ for folder in open(sys.argv[1]):
           os.system('python index_reads_IGH_Tn5_Uncut_fuzzy.py '+path+' '+path+'/Uncut/ '+cutoff_Uncut + ' ' +Chain_Type)
           os.system('python index_reads_IGH_Tn5_AB_fuzzy.py '+path+' '+path+'/A/'+' '+path+'/B/ '+cutoff_AB )
           os.system('python cout_coverage.py '+path)
-          exit()
           print 'coverage calculation complete'
           os.system('python AMPssembler.py '+path+ '/indexed_reads_Uncut_AB_sorted.txt > '+path+'consensus_complete.txt')
           length=0
