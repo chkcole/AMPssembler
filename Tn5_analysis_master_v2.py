@@ -57,7 +57,6 @@ for folder in open(sys.argv[1]):
       for cutoff_AB in ['2']:
           print 'cutoff Uncut ', cutoff_Uncut
           print 'cutoff AB ', cutoff_AB
-
           os.system('python index_reads_IGH_Tn5_Uncut_fuzzy.py '+path+' '+path+'/Uncut/ '+cutoff_Uncut + ' ' +Chain_Type)
           os.system('python index_reads_IGH_Tn5_AB_fuzzy.py '+path+' '+path+'/A/'+' '+path+'/B/ '+cutoff_AB )
           os.system('python cout_coverage.py '+path)
@@ -68,7 +67,6 @@ for folder in open(sys.argv[1]):
                length+=1
           print length/4
           os.system('python combine_identicals_cluster.py '+ path)
-          os.system("./run_igblast.py "+path)
   os.system("rm "+path+"/indexed*")
   os.system("rm "+path+"/A/*trimmed*")
   os.system("rm "+path+"/A/*Combined*")
